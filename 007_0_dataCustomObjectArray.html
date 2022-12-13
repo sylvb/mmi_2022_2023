@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>chart.js - Object array</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 300px;">
+			<canvas id="myChart"></canvas>
+		</div>
+        <script type="text/javascript">
+		let serie = [{nom: 'A', note: 40}, {nom: 'B', note: 50}, {nom: 'C', note: 10}];
+		
+		const ctx = document.getElementById('myChart').getContext('2d');
+		
+		// creer context
+		// creer chart
+		// creer un jeu de données (dataset) avec les valeur de la variable serie	
+		// definir options.parsing
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				datasets: [{
+					data: serie
+				}],
+			},
+			options: {
+				parsing: {
+					xAxisKey: 'nom',
+					yAxisKey: 'note'
+				},
+				plugins: {
+					legend: {
+					  display: false
+					}
+				}    
+			}
+		});
+        </script>
+    </body>
+</html>
