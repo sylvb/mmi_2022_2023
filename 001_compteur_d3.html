@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>D3.js - compteur</title>
+        <script type="text/javascript" src="static/d3.js"></script>
+
+		<style>
+			.axeOrdonnees line , .axeOrdonnees path, .grilleOrdonnees line{stroke: #dddddd; stroke-width: 1px; shape-rendering: crispEdges;}
+			
+			text {fill: #777777; font-family: arial; font-size: 12px; text-rendering: optimizeLegibility}
+			
+			.valueBand {fill: rgba(75, 192, 192, 0.2); stroke: rgba(75, 192, 192, 1);}
+		</style>
+    </head>
+    <body>
+		<svg style="zzzborder: 1px dashed grey" width="500" height="250"></svg>
+        <script type="text/javascript">
+
+		let donnees = [{j: 'Lundi', c: 2245}, {j: 'Mardi', c: 2486}, {j: 'Mercredi', c: 2402}, {j: 'Jeudi', c:  2435}, {j: 'Vendredi', c: 2042}, {j: 'Samedi', c: 1361}, {j: 'Dimanche', c: 1251}]
+
+
+		let echelleAbscisse = d3.scaleLinear()
+										.domain([0, 7])
+										.range([50, 500]);
+		
+		
+		let echelleOrdonnees = d3.scaleLinear()
+										.domain([0, 2500])
+										.range([0, 190])
+										.nice([100])
+
+		let echelleAxeOrdonnees = d3.scaleLinear()
+										
+										.domain([0, 2500])
+										.range([190, 0])
+										.nice([100])
+
+		let grilleOrdonnees = d3.axisLeft()
+								.ticks(6)
+								.tickFormat('')
+								.scale(echelleAxeOrdonnees)
+								.tickSize(-480)
+								
+		/// dessiner axe ordonnée
+		d3.select("svg")
+			.append("g")
+				.classed("grilleOrdonnees", true)
+				.attr("transform", "translate(40, 30)")
+				.call(grilleOrdonnees);
+
+		let axeOrdonnees = d3.axisLeft()
+								.ticks(6)
+								.scale(echelleAxeOrdonnees);
+
+		/// dessiner axe ordonnée
+		d3.select("svg")
+			.append("g")
+				.classed("axeOrdonnees", true)
+				.attr("transform", "translate(40, 30)")
+				.call(axeOrdonnees);
+				
+		
+		var _largeurJour = (echelleAbscisse(1) - echelleAbscisse(0) - 2) * 0.75;
+
+		// dessiner les bandes
+		d3.select("svg")
+			.selectAll("rect.valueBand")
+			.data(donnees)
+			.enter()
+			.append("rect")
+				.classed("valueBand", true)
+				.attr("width", _largeurJour)
+				.attr("height", 0)
+				.attr("x", function (donnee, indice) {
+					return echelleAbscisse(indice);
+				})
+				.attr("y", 221)
+				//.style("fill", 'rgba(75, 192, 192, 0.2)')
+				//.style("stroke", 'rgba(75, 192, 192, 1)')
+			.transition()
+				.duration(500)
+					.attr("height", function (donnee, indice) {
+						return echelleOrdonnees(donnee.c);
+					})
+					.attr("y", function (donnee, indice) {
+						return 221 - echelleOrdonnees(donnee.c);
+					})
+		
+		// textes abscisse
+		let legendeAbscisses = d3.select("svg")
+			.append("g")
+			.classed("legendeAbscisses", true);
+			
+		legendeAbscisses
+			.selectAll("text.jour")
+			.data(donnees)
+			.enter()
+			.append("text")
+				.classed("jour", true)
+				// utiliser le centre comme référence pour le placement horizontal
+				.style("text-anchor", "middle")	
+				// contenu
+				.text(function (donnee, indice) {
+					return donnee.j;
+				})
+				// position horizontal
+				.attr("x", function (donnee, indice) {
+					return echelleAbscisse(indice) + (_largeurJour / 2);
+				})
+				.attr("y", 240);
+				
+		// legende
+		let legende = d3.select("svg")
+			.append("g")
+			.classed("datasetLegend", true)
+			.attr("transform", "translate(160, 8)");
+			
+		legende
+			.append("rect")
+			.attr("width", _largeurJour * 0.9)
+			.attr("height", 12)
+			.style("fill", 'rgba(75, 192, 192, 0.2)')
+			.style("stroke", 'rgba(75, 192, 192, 1)');
+			
+		legende
+			.append("text")
+				.text('Moyenne journalière')
+				.attr("x", 60)
+				.attr("y", 12);
+		</script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>chart.js - Object array 2</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 300px;">
+			<canvas id="myChart"></canvas>
+		</div>
+        <script type="text/javascript">
+		let serieA = [{x: 'Lundi', y: 40}, {x: 'Mardi', y: 50}, {x: 'Mercredi', y: 10} ];
+		let serieB = [{x: 'Mardi', y: 20}, {x: 'Jeudi', y: 5}, {x: 'Vendredi', y: 75}];
+		
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				datasets: [{
+					label: 'serie A',
+					data: serieA,
+					backgroundColor: 'rgba(255, 99, 132, 0.2)',
+					borderColor: 'rgba(255, 99, 132, 1)',
+					borderWidth: 1,
+				} ,{
+					label: 'serie B',
+					data: serieB,
+					backgroundColor: 'rgba(54, 162, 235, 0.2)',
+					borderColor: 'rgba(54, 162, 235, 1)',
+					borderWidth: 1,
+				} ],
+			}
+		});
+        </script>
+    </body>
+</html>

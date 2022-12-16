@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>chart.js - lables</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 500px;">
+			<canvas id="myChart"></canvas>
+		</div>
+		<div>
+		<br/>
+		1 série de 7 données, 1 série de 4 données.<br/><br/>
+		5 étiquettes de donnéees = 5 données représentées.<br/> 
+		</div>
+        <script type="text/javascript">
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['Janvier', 'Févriers', 'Mars', 'Avril', 'Mai'],
+				datasets: [{
+					label: 'serie A',
+					data: [ 1, 2, 3, 4, 5, 6, 7 ] ,
+					borderWidth: 1,
+					backgroundColor: ['rgba(54, 162, 235, 0.2)']
+				}, {
+					label: 'serie B',
+					data: [ 1, 2, 4, 8 ] , 
+					borderWidth: 1,
+					backgroundColor: ['rgba(255, 99, 132, 0.2)']
+				
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+
+        </script>
+    </body>
+</html>
