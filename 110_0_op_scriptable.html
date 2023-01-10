@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>chart.js - </title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 500px;">
+			<canvas id="temp" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="precip" width="400"></canvas>
+		</div>
+		<div style="margin-top: 2em; font-size: 90%; color: grey">
+			<span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/3.9.1/charts/line.html">./charts/line.html</a></br>
+			<span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/latest/charts/bar.html">./charts/bar.html</a>
+		</div>
+		
+        <script type="text/javascript">
+		let donnees = [{x: '0', y:10}, {x: '1', y:12}, {x: '2', y:6}, {x: '3', y:1}, {x: '4', y:-2},  {x: '5', y:-8}]
+
+
+		var ctx = document.getElementById('temp').getContext('2d');
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				datasets: [{
+					data: donnees,
+					/// couleur de fond			
+
+				}]
+			},
+		});
+        </script>
+    </body>
+</html>

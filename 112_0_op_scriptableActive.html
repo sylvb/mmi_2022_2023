@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>option indexable - active</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 500px;">
+			<canvas id="precip" width="400"></canvas>
+		</div>
+		<div style="margin-top: 2em; font-size: 90%; color: grey">
+			<span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/3.9.1/charts/line.html">./charts/line.html</a></br>
+			<span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/latest/charts/bar.html">./charts/bar.html</a>
+		</div>
+		
+        <script type="text/javascript">
+		let precipitation = [55.1, 47.6, 51, 53.7, 64.6, 53.9, 61.3, 53.4, 56.1, 63.6, 55.2, 61.4]
+		
+
+		let mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'];
+
+		/// couleur de fond si active
+		///...ici...
+
+		var ctx = document.getElementById('precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'Précipitation',
+					data: precipitation,  					
+				}]
+			}
+		});		
+        </script>
+    </body>
+</html>
