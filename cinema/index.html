@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>API cinema</title>
+        <script type="text/javascript" src="./../static/chart.js"></script>
+		<script type="text/javascript" src="./../static/jquery.js"></script>
+    </head>
+    <body>
+		<div>
+			<span id="status"></span></div>
+			<div style="width: 700px">
+				<canvas id="chartFreq"></canvas>
+			</div>
+		</div>
+		<div style="font-size: 80%; color: grey;">
+			<h5>Aide</h5>
+		<div>
+			<h6>API</h6>
+			
+			<div>Aide et console : <a href="https://data.smartidf.services/api/v2/console" target="_blank">https://data.smartidf.services/api/v2/console</a></div>
+		</div>
+		
+		<div>
+			<h6>JS</h6>
+			<div>promesse : <a href="https://developer.mozilla.org/fr/docs/Learn/JavaScript/Asynchronous/Promises" target="_blank">https://developer.mozilla.org/fr/docs/Learn/JavaScript/Asynchronous/Promises</a></div>
+			<div>fetch <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" target="_blank">https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch</a></div>
+		</div>
+		</div>
+
+		
+		<script type="text/javascript">
+		function afficher(enregistrements) {
+			const ctx = document.getElementById('chartFreq').getContext('2d');
+			const myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					datasets: [{
+						data: enregistrements,
+						parsing: {yAxisKey: 'record.fields.entrees_millions'}
+					}],
+				},
+				options: {
+				    scales: {
+						y: {
+						  beginAtZero: true
+						}
+					},
+					parsing: {
+						xAxisKey: 'record.fields.annee',
+						
+					},
+					plugins: {
+						legend: {
+						  display: false
+						}
+					}    
+				}
+			});
+		}
+		
+		async function fetchFrequentation() {
+			var el = document.getElementById('status').innerText = '...loading...'; 
+			
+			let url = 'https://data.smartidf.services/api/v2/catalog/datasets/frequentation-dans-les-salles-de-cinema/records?'+
+			  'limit=41'+
+			  '&offset=0'+
+			  '&timezone=UTC'+
+			  '&select=annee%2C%20entrees_millions' + 
+			  '&order_by=annee' ;
+			
+			/// interroger URL
+			const response = await fetch(url);
+			console.log('reçu');
+			
+			var el = document.getElementById('status').innerText = 'loaded ; ...parsing...'; 
+			if (!response.ok) {
+			  throw new Error('Erreur HTTP : ' + response.status +'.');
+			}
+			
+			/// lire le contenu de la réponse
+			const json = await response.json();
+			var el = document.getElementById('status').innerText = 'loaded ; parsed'; 
+			
+			console.log('lu');
+			console.log('json', json.records);
+			
+			/// afficher le resultat
+			afficher(json.records);
+		}
+		
+		console.log('avant appel');
+		
+		fetchFrequentation();
+
+		console.log('après appel²')
+		</script>
+    </body>
+</html>
