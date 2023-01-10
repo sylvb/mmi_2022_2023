@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>chart.js - </title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 500px;">
+			<canvas id="myChart" width="400"></canvas>
+		</div>
+		<div style="margin-top: 2em; font-size: 90%; color: grey"><span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/3.9.1/charts/line.html">./charts/line.html</a></div>
+		
+        <script type="text/javascript">
+		let donnees = {
+            ligne_l: [0, 20, 40, 60, 80, 100, 120, 140, 160, 180],
+            histo_p: [0, 1, 2, 4, 8, 16, 32, 64, 128, 256],
+            ligne_p: [0, 1, 2, 4, 8, 16, 32, 64, 128, 256],
+        }
+  
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			data: {
+				labels: [1,2,3,4,5,6,7,8,9,10],
+				datasets: [{
+					type: 'line',
+					label: 'ligne',
+					data: donnees.ligne_l
+				},{
+					type: 'bar',
+					label: 'histo',
+					data: donnees.histo_p
+				},{
+					type: 'line',	
+					label: 'ligne puissance 2',
+					data: donnees.ligne_p ,
+				}]
+			}, 
+			options: {
+				datasets: {
+					line: {pointRadius: 0, 	backgroundColor: '#e6390088', borderColor: '#e6390088', borderDash: [4, 2], tension: 0.3},
+					bar: {borderWidth: 0, backgroundColor: '#cc336688'}
+				}
+			}
+		});
+        </script>
+    </body>
+</html>

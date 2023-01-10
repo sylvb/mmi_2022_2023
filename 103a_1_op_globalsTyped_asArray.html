@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>chart.js - </title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 500px;">
+			<canvas id="brest_temp" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="pont_temp" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="nice_temp" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="melun_temp" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="brest_precip" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="pont_precip" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="nice_precip" width="400"></canvas>
+		</div>
+		<div style="width: 500px;">
+			<canvas id="melun_precip" width="400"></canvas>
+		</div>
+		<div style="margin-top: 2em; font-size: 90%; color: grey">
+			<span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/3.9.1/charts/line.html">./charts/line.html</a></br>
+			<span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/latest/charts/bar.html">./charts/bar.html</a>
+		</div>
+		
+        <script type="text/javascript">
+		let stations = [{
+				nom: "Brest",
+				temperature:  [6.9, 6.8, 8.4, 9.6, 12.6, 15, 16.9, 17, 15.4, 12.7, 9.5, 7.3],
+				precipitation: [143.8, 111.7, 95.8, 92.1, 79, 59.8, 66.8, 66.8, 83.3, 129, 134.1, 147.8]
+			}, {
+				nom: "Pontarlier",
+				temperature: [-0.2, 0.6, 3.7, 6.9, 11.3, 14.5, 17, 16.6, 13.1, 9.5, 3.9, 1],
+                precipitation: [117.4, 106.6, 113.9, 113.4, 147.2, 131.2, 119.9, 127.9, 127.3, 131.9, 127.6, 139]
+			}, {
+				nom: "nice",
+				temperature: [9.2, 9.6, 11.6, 13.6, 17.4, 20.9, 23.8, 24.1, 21, 17.4, 12.9, 10],
+				precipitation: [69, 44.7, 38.7, 69.3, 44.6, 34.3, 12.1, 17.8, 73.1, 132.8, 103.9, 92.7]
+			}, {
+				nom: "Melun",
+				temperature: [3.7, 4.4, 7.6, 10.2, 14.1, 17, 19.3, 19.1, 15.8, 12, 7.1, 4.3],
+				precipitation: [55.1, 47.6, 51, 53.7, 64.6, 53.9, 61.3, 53.4, 56.1, 63.6, 55.2, 61.4]
+			}
+		];
+		let mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'décembre'];
+		
+		
+		console.log('Chart.defaults', Chart.defaults)
+				
+		/// option par defaut pour le type "bar"
+  		Chart.defaults.datasets['bar'].borderWidth = 0;
+		Chart.defaults.datasets['bar'].backgroundColor = '#3366cc88';
+		
+		/// option par defaut pour le type "line"
+  		Chart.defaults.datasets['line'].pointRadius = 0;
+		Chart.defaults.datasets['line'].backgroundColor = '#e6390088';		
+		Chart.defaults.datasets['line'].borderColor = '#e6390088';
+		Chart.defaults.datasets['line'].tension = 0.3;
+		
+		let i = 0;		
+		var ctx = document.getElementById('brest_temp').getContext('2d');
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'température moyenne à ' + stations[i].nom,
+					data: stations[i++].temperature,  // i++ equivalent a i = i + 1         
+				}]
+			}
+		});	
+		var ctx = document.getElementById('pont_temp').getContext('2d');
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'température moyenne à ' + stations[i].nom,
+					data: stations[i++].temperature,    // i++ equivalent a i = i + 1      
+				}]
+			}
+		});
+		var ctx = document.getElementById('nice_temp').getContext('2d');
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'température moyenne à ' + stations[i].nom,
+					data: stations[i++].temperature,  // i++ equivalent a i = i + 1        
+				}]
+			}
+		});	
+		var ctx = document.getElementById('melun_temp').getContext('2d');
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'température moyenne à ' + stations[i].nom,
+					data: stations[i++].temperature,  // i++ equivalent a i = i + 1         
+				}]
+			}
+		});
+		
+		i = 0;
+		var ctx = document.getElementById('brest_precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'Précipitation moyenne à ' + stations[i].nom,
+					data: stations[i++].precipitation,         
+				}]
+			}
+		});	
+		var ctx = document.getElementById('pont_precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'Précipitation moyenne à ' + stations[i].nom,
+					data: stations[i++].precipitation,              
+				}]
+			}
+		});
+		var ctx = document.getElementById('nice_precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'Précipitation moyenne à ' + stations[i].nom,
+					data: stations[i++].precipitation,             
+				}]
+			}
+		});	
+		var ctx = document.getElementById('melun_precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: mois,
+				datasets: [{
+					label: 'Précipitation moyenne à ' + stations[i].nom,
+					data: stations[i++].precipitation,              
+				}]
+			}
+		});		
+        </script>
+    </body>
+</html>
