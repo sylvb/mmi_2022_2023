@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>les types javascript</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		
+    </head>
+    <body>
+		<div style="width: 500px">
+			Cette page n'affiche rien.<br/>
+			Les exemples ecrivent dans la console du navigateur.
+		</div>
+		
+		<script type="text/javascript">
+		
+		var uneChaine = 'blabla';
+		console.log(uneChaine);
+		
+		uneChaine = uneChaine + ' la suite';
+		console.log(uneChaine);
+		
+		var unEntier = 10;
+		console.log(unEntier);
+		
+		unEntier = unEntier + 3;
+		console.log(unEntier);
+		
+		/// langage non typé, ajout du nombre a une chaine
+		uneChaine = uneChaine + 6;
+		console.log(uneChaine);
+		
+		// piege ajout de la CHAINE "10" a un nombre
+		// transforme le nombre en chaine
+		/*
+		unEntier = unEntier + '10';
+		console.log(unEntier);
+		*/
+		
+		
+		if (unEntier == 13) {
+			console.log('Egal')
+		} else {
+			console.log('Non egal')
+		}
+		
+		if (unEntier != 13) {
+			console.log('Différent')
+		} else {
+			console.log('Pas différent')
+		}
+		
+		/*
+		// piege "=" au lieu de "==" affecte 100 a unEntier et condition est vraie
+		if (unEntier = 100) {
+			console.log('Egal')
+		} else {
+			console.log('Non egal')
+		}
+		console.log(unEntier);*/
+		
+		var unTableauVide = [];
+		
+		var unTableau = ['pomme', 'poire', 45];
+		console.log(unTableau);
+		
+		// afficher 'poire'
+		console.log(unTableau[1]);
+		
+		unTableau.push('nouveau');
+		console.log(unTableau);
+		console.log(unTableau.length);
+		
+		//	boucle pour (for)
+		//		position de depart à 0 ;
+		//		tant que position inférieur à longueur;
+		//		increment de 1
+		//			i++ <=>  i = i + 1
+		for (var i = 0; i < unTableau.length; i++) {
+			console.log(i, unTableau[i]);
+		}
+		
+		
+		// boucle pour 
+		//		position de depart à longueur - 1
+		//		tant que position supérieure ou égale à 0
+		//		decrement de 1
+		for (var i = unTableau.length - 1; i >= 0; i--) {
+			console.log(i, unTableau[i]);
+		}
+		
+		
+		var unEtudiant = {
+			nom: 'Berlioz',
+			prenom: 'Hector',
+			ville: {
+				nom: 'Dijon',
+				cp: 21000
+			},
+			resultats: [{
+					matiere: 'dev. web.',
+					note: 12.3
+				}, {
+					matiere: 'composition',
+					note: 19
+				}, {
+					matiere: 'histoire',
+					note: 6
+				}
+			
+			]
+		}
+		console.log(unEtudiant);
+		
+		var cpBerlioz = unEtudiant.ville.cp;
+		console.log(cpBerlioz);
+		
+		var noteCompo = unEtudiant.resultats[1].note;
+		console.log(noteCompo);
+		
+		
+		function somme(nombreA, nombreB) {
+			return nombreA + nombreB;
+			
+			// code apres le rturn ignoré.
+			alert('message jamais affiché')
+		}
+		console.log(somme(2, 50))
+		
+		</script>
+    </body>
+</html>
