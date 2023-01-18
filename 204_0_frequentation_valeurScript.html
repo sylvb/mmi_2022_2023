@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Fréquentation RER</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<style>svg {border: 4px solid black}</style>
+    </head>
+    <body>
+		<div style="width: 70%;">
+			<canvas id="freq" width="400"></canvas>
+		</div>
+
+        <script type="text/javascript">
+		var ctx = document.getElementById('freq').getContext('2d');
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00', '24:00', '01:00' ],
+				datasets: [{
+					data: [10, 20,  60, 100, 100, 70, 50, 40, 30, 30, 40, 50, 70, 100, 80, 60, 50, 40, 20, 15, 10],
+					/// couleur de fond	(backgroundColor) en fonction de la donnée
+				}]
+			},
+			options: {
+				borderRadius: 8,
+				scales: {
+					x: {
+						grid: {
+							display: false
+						}
+					},
+					y: {
+						display: false,
+						grid: {
+							display: false
+						}
+					},
+				},
+				plugins: {
+					legend: {
+						display: false
+					}
+				}
+				
+			}
+		});
+        </script>
+    </body>
+</html>

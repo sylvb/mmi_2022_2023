@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TV - themes</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<script type="text/javascript" src="./donnees/tv_moyenne_themesParChaines.js"></script>
+		<style>body {text-align: center; margin: 2em; font-family: arial;}</style>
+    </head>
+    <body>
+		<div style="position: relative;width: 90%;  min-width: 400px; display: inline-block">
+			<canvas id="myChart"></canvas>
+		</div>
+		<div>Empilement (stacked: true) par groupe public/privé (stack: 'public' et stack: 'prive')</div>
+		
+		<div style="margin-top: 2em; font-size: 90%; color: grey">
+			<span>Source : </span><a href="https://data.smartidf.services" target="_blank">https://data.smartidf.services</a>
+		</div>
+		
+		
+        <script type="text/javascript">
+		
+		/// moyennes : objet declaré dans le fichier ./donnees/tv_moyenne_themesParChaines.js.js
+		console.log(moyennes)
+				
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: moyennes.themes,
+				datasets: [{
+					label: 'TF1',
+					data: moyennes.tf1,
+					backgroundColor: '#0A20C488',
+				}, {
+					label: 'France 2',
+					data: moyennes.f2,
+					backgroundColor: '#EB003288',
+				},{
+					label: 'France 3',
+					data: moyennes.f3,
+					backgroundColor: '#0082E688',
+				}, {
+					label: 'Canal+',
+					data: moyennes.canalPlus,
+					backgroundColor: '#00000088',
+				},{
+					label: 'Arte',
+					data: moyennes.arte,
+					backgroundColor: '#FD470088',
+				}, {
+					label: 'M6',
+					data: moyennes.m6,
+					backgroundColor: '#D2D2D288',
+				}],
+			},
+			options: {
+				interaction: {
+				  mode: 'index',
+				  intersect: true,
+				},	
+				plugins: {
+					title: {
+						text: 'Sujets du journal du soir par theme et par chaîne.',
+						display: true,
+					}
+				},
+				scales: {
+					x: {
+						stacked: true,
+						title: {
+							display: true,
+							text: 'Thématiques'
+						}, grid: {
+							display: false, // only want the grid lines for one axis to show up
+							//drawTicks: false,
+						}, ticks: {
+							display: true,
+							callback: function (e, i) {console.log(this.chart.data.labels[e]); return this.chart.data.labels[e]}
+						}
+						
+					},
+					y: {
+						stacked: true,
+						
+						title: {
+							display: true,
+							text: 'Nombre moyen de sujets annuels'
+						}
+					}
+				}
+			}
+		});
+        </script>
+    </body>
+</html>

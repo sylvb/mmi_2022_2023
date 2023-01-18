@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TV - sports</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<script type="text/javascript" src="./donnees/tv_raw.js"></script>
+	
+    </head>
+    <body>
+		<div style="position: relative;width: 80%;  min-width: 400px; display: inline-block">
+			<canvas id="precip"></canvas>
+		</div>
+
+        <script type="text/javascript">
+		/// données dans objet donnees declaré dans ./donnees/tv_raw.js
+		
+		/// accicher les données dans la console
+		console.log(donnees);
+		
+		var ctx = document.getElementById('precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				//labels: , // indiquer les abscisse de l'objet "donnees"
+				datasets: [{
+					//data: , // indiquer le jeu de donnée de l'objet "donnees"
+					tension: 0.1,
+					pointRadius: 0,
+					borderWidth: 4,
+					borderColor: 'rgba(100,100,200,1)',
+					backgroundColor: 'rgba(100,100,200,0.22)',
+					fill: true,
+				}],
+			}, 
+			options: {	
+				plugins: {
+					legend: {
+						display: false,
+					},title: {
+						text: 'Nombre de sujet "sport" lors du journal du soir',
+						display: true,
+					}
+				}
+				/// COMPLETER echelles ici
+			}
+		});	
+        </script>
+    </body>
+</html>
