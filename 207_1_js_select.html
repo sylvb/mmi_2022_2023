@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>JS select</title>
+		<link rel="stylesheet" href="static/bootstrap.css" >
+    </head>
+    <body>
+		<div>
+			<input id="input1"></input>
+			<button id="boutonQuerySelector" class="btn btn-secondary">QuerySelector</button>
+			<button id="boutonQuerySelectorAll" class="btn btn-secondary">QuerySelectorAll</button>
+		</div>
+		<div>
+			<div>Vous avez indiqué : <span id="res1" class="result"></span></div>
+			<div>Vous avez indiqué : <span id="res2" class="result"></span></div>
+			<div>Vous avez indiqué : <span id="res3" class="result"></span></div>
+		</div>
+        <script type="text/javascript">
+			// trouver le bouton dans la page
+			var boutonQuerySelector = document.getElementById('boutonQuerySelector');
+			boutonQuerySelector.addEventListener('click', function (e) {
+				var input = document.getElementById('input1');
+				var valeurEntree = input.value;
+				
+				document.querySelector('.result').innerText = valeurEntree;
+			}) 
+			
+			var boutonQuerySelectorAll = document.getElementById('boutonQuerySelectorAll');
+			boutonQuerySelectorAll.addEventListener('click', function (e) {
+				var input = document.getElementById('input1');
+				var valeurEntree = input.value;
+								
+				var zonesDeResultat = document.querySelectorAll('.result');
+				for (var i = 0 ; i < zonesDeResultat.length; i++) { 
+					zonesDeResultat[i].innerText = valeurEntree;
+				}
+			}) 
+			
+        </script>
+    </body>
+</html>

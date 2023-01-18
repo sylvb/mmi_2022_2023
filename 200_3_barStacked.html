@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TV - themes</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<script type="text/javascript" src="./static/colorschemes.js"></script>
+		<script type="text/javascript" src="./donnees/tv_moyenne_themesParChaines.js"></script>
+		<style>body {text-align: center; margin: 2em; font-family: arial;}</style>
+    </head>
+    <body>
+		<div style="position: relative;width: 90%;  min-width: 400px; display: inline-block">
+			<canvas id="myChart"></canvas>
+		</div>
+		<div>Empilement (stacked: true). Jeux de données créé par une boucle for</div>
+		<div style="margin-top: 2em; font-size: 90%; color: grey">
+			<span>Source : </span><a href="https://data.smartidf.services" target="_blank">https://data.smartidf.services</a>
+		</div>
+        <script type="text/javascript">
+		
+		/// moyennes : objet declaré dans le fichier ./donnees/tv_moyenne_themesParChaines.js.js
+		console.log(moyennes)
+		var jeuxDeDonnees = [];
+		
+		var i = 0;
+		for (var nomJeux in  moyennes) {
+			if (nomJeux != 'themes') {
+				jeuxDeDonnees.push({
+					data: moyennes[nomJeux],
+					label: nomJeux,
+					backgroundColor: Tableau20[i++]
+				})
+			}
+		}
+		 
+				
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: moyennes.themes,
+				datasets: jeuxDeDonnees,
+			},
+			options: {
+				interaction: {
+				  mode: 'index',
+				  intersect: true,
+				},			
+				plugins: {
+					title: {
+						text: 'Sujets du journal du soir par theme et par chaîne.',
+						display: true,
+					},
+					/*tooltip: {
+						callbacks: {
+							beforeTitle: function (i) {
+								
+								console.log('tooltip.c.beforeTitle', i);
+								
+								return 'beforeTitle'
+							},
+							label: function (context) {
+								
+								console.log('tooltip.c.label', context);
+								var s = 0;
+								for (var i  in context.parsed._stacks.y) {
+									s += context.parsed._stacks.y[i];
+								}
+								return context.dataset.label + ': ' + context.formattedValue + ' sujets ; ' + (100 * context.raw / s).toFixed(2) +'%'
+							},
+						}
+						//mode: 'dataset'
+					}*/
+				},
+				scales: {
+					x: {
+						stacked: true,
+						title: {
+							display: true,
+							text: 'Thématiques'
+						}, grid: {
+							display: false, // only want the grid lines for one axis to show up
+							//drawTicks: false,
+						}, ticks: {
+							display: true,
+							callback: function (e, i) {console.log(this.chart.data.labels[e]); return this.chart.data.labels[e]}
+						}
+						
+					},
+					y: {
+						stacked: true,
+						title: {
+							display: true,
+							text: 'Nombre moyen de sujets annuels'
+						}
+					}
+				}
+			}
+		});
+        </script>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>JS add</title>
+		<link rel="stylesheet" href="static/bootstrap.css" >
+		
+		<style>#destination>div {display: inline-block; border: 2px dotted grey; padding: 0.5em; margin: 0.2em}</style>
+    </head>
+    <body>
+		<div>
+			<input id="input1"></input>
+			<button id="boutonAjouter" class="btn btn-secondary">Ajouter</button>
+			<button id="boutonAjouterSiNExistePas" class="btn btn-secondary">Ajouter si n'existe pas</button>
+		</div>
+		<div id="destination">
+			
+		</div>
+        <script type="text/javascript">
+			// trouver le bouton dans la page
+			var boutonAdd = document.getElementById('boutonAjouter');
+			boutonAdd.addEventListener('click', function (e) {
+				var input = document.getElementById('input1');
+				var valeurEntree = input.value;
+				
+				/// creer un noeud
+				var element = document.createElement('div');
+				
+				/// ajouter la classe "mot" au noeud créé
+				element.classList.add('mot');
+				
+				/// indiquer la valeur entree comme id
+				element.setAttribute('id', valeurEntree)
+				
+				// contenu texte
+				var texte = document.createTextNode(valeurEntree);
+				element.appendChild(texte);
+				
+				// selectionner la destination
+				var destination = document.getElementById('destination');
+				
+				destination.appendChild(element);
+			}) ;
+			
+
+			var boutonAddIfNotExists = document.getElementById('boutonAjouterSiNExistePas');
+			boutonAddIfNotExists.addEventListener('click', function (e) {
+				var input = document.getElementById('input1');
+				var valeurEntree = input.value;
+				
+				/// chercher si un ellement existe deja
+				var element  = document.getElementById(valeurEntree);
+				if (element == null)  {
+					/// creer un noeud
+					var element = document.createElement('div');
+					
+					/// ajouter la classe "mot" au noeud créé
+					element.classList.add('mot');
+					
+					/// indiquer la valeur entree comme id
+					element.setAttribute('id', valeurEntree)
+					
+					// contenu texte
+					var texte = document.createTextNode(valeurEntree);
+					element.appendChild(texte);
+					
+					// selectionner la destination
+					var destination = document.getElementById('destination');
+					
+					destination.appendChild(element);
+				}
+			}) ;
+        </script>
+    </body>
+</html>
