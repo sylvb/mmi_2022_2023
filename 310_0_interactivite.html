@@ -163,33 +163,6 @@
 
 		/// creer les boutons des stations
 		
-		// obtenir la zone de boutons
-		var zoneBoutons = document.getElementById('stations');
-		// pour chaque station
-		for (var i = 0; i < stations.length ; i++) {
-			// creer un nouveau bouton
-			var nouveauBouton = document.createElement('a');
-			// ajouter le bouton a la zone de graphique
-			zoneBoutons.appendChild(nouveauBouton);
-			
-			// propriétés du bouton
-			nouveauBouton.innerText = stations[i].nom;
-			nouveauBouton.classList.add('btn');
-			nouveauBouton.classList.add('btn-outline-primary');
-			nouveauBouton.setAttribute('indiceStation', i);
-			
-			nouveauBouton.addEventListener('click', function () {
-				var indiceStation = parseInt(this.getAttribute('indiceStation'));
-				
-				meteoChart.options.plugins.title.text = stations[indiceStation].nom;
-				
-				meteoChart.data.datasets[0].data =  stations[indiceStation].temperature;
-				meteoChart.data.datasets[1].data =  stations[indiceStation].precipitation;
-				
-				meteoChart.update()
-			})
-		}
-
         </script>
     </body>
 </html>
