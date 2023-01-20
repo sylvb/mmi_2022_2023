@@ -39,12 +39,8 @@
 				precipitation: [55.1, 47.6, 51, 53.7, 64.6, 53.9, 61.3, 53.4, 56.1, 63.6, 55.2, 61.4]
 			}
 		];
+				
 		
-		const totalDuration = 1000;
-		const delayBetweenPoints = totalDuration / 12;		
-		
-
-
 		var ctx = document.getElementById('canvasMeteo_brest').getContext('2d');
 		var meteoChart = new Chart(ctx, {
 			data: {
@@ -86,7 +82,15 @@
 						padding: 10,
 						callbacks: {
 							label: function (contexte) {
-								return contexte.dataset.label + ' : ' + contexte.formattedValue + ' ' + (contexte.datasetIndex==0?'°C':'mm');
+								var nom = contexte.dataset.label;
+								var valeur = contexte.formattedValue;
+								if (contexte.datasetIndex==0) {
+									var unit = '°C';
+								} else {
+									var unit = 'mm';
+								}
+								
+								return nom + ' : ' + valeur + unit;
 							}
 						}
 					},				
@@ -158,7 +162,33 @@
 		});	
 
 		/// creer les boutons des stations
-		/// ici
+		
+		// obtenir la zone de boutons
+		var zoneBoutons = document.getElementById('stations');
+		// pour chaque station
+		for (var i = 0; i < stations.length ; i++) {
+			// creer un nouveau bouton
+			var nouveauBouton = document.createElement('a');
+			// ajouter le bouton a la zone de graphique
+			zoneBoutons.appendChild(nouveauBouton);
+			
+			// propriétés du bouton
+			nouveauBouton.innerText = stations[i].nom;
+			nouveauBouton.classList.add('btn');
+			nouveauBouton.classList.add('btn-outline-primary');
+			nouveauBouton.setAttribute('indiceStation', i);
+			
+			nouveauBouton.addEventListener('click', function () {
+				var indiceStation = parseInt(this.getAttribute('indiceStation'));
+				
+				meteoChart.options.plugins.title.text = stations[indiceStation].nom;
+				
+				meteoChart.data.datasets[0].data =  stations[indiceStation].temperature;
+				meteoChart.data.datasets[1].data =  stations[indiceStation].precipitation;
+				
+				meteoChart.update()
+			})
+		}
 
         </script>
     </body>
