@@ -68,7 +68,23 @@
 				},				
 				plugins: {
 					tooltip: {
-						
+						position: 'average' , // average ou nearest
+						xAlign: 'center',
+						yAlign: 'bottom',
+						backgroundColor: '#00000099',
+						boxPadding: 10,						
+						padding: 10,
+						callbacks: {
+							label: function (contexte) {
+								var nom = contexte.dataset.label;
+								var valeur = contexte.formattedValue;
+								if (contexte.datasetIndex == 0)
+									var unit = '°C';
+								else
+									var unit = 'mm';
+								return  nom + ' : ' + valeur + unit
+							}
+						}
 					},
 					title: {
 						display: true,
