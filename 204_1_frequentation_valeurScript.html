@@ -21,6 +21,8 @@
 					data: [10, 20,  60, 100, 100, 70, 50, 40, 30, 30, 40, 50, 70, 100, 80, 60, 50, 40, 20, 15, 10],
 					/// couleur de fond			
 					backgroundColor: function(context) {
+						if (context.active) return 'blue';
+						
 						return 'rgb('+(context.raw*2)+','+(200 - (context.raw*2))+' ,0)';
 					}
 				}]
