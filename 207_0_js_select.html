@@ -2,23 +2,32 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>JS select</title>
+        <title>querySelector</title>
 		<link rel="stylesheet" href="static/bootstrap.css" >
     </head>
     <body>
 		<div>
 			<input id="input1"></input>
 			<button id="boutonQuerySelector" class="btn btn-secondary">QuerySelector</button>
-			<button id="boutonQuerySelectorAll" class="btn btn-secondary">QuerySelectorAll</button>
 		</div>
-		<div>
-			<div>Vous avez indiqué : <span id="res1" class="result"></span></div>
-			<div>Vous avez indiqué : <span id="res2" class="result"></span></div>
-			<div>Vous avez indiqué : <span id="res3" class="result"></span></div>
+		<div id="querySelector">
+			<h2>QuerySelector</h2>
+			<div>Premier élément correspondant au sélecteur css</div>
+			<div>Vous avez indiqué : <span class="result"></span></div>
+			<div>Vous avez indiqué : <span class="result"></span></div>
+			<div>Vous avez indiqué : <span class="result"></span></div>
 		</div>
+		
+		<div id="querySelectorAll">
+			<h2>QuerySelectorAll</h2>
+			<div>Tous les éléments correspondant au sélecteur css</div>
+			<div>Vous avez indiqué : <span class="result"></span></div>
+			<div>Vous avez indiqué : <span class="result"></span></div>
+			<div>Vous avez indiqué : <span class="result"></span></div>
+		</div>
+		
         <script type="text/javascript">
 
-			
         </script>
     </body>
 </html>

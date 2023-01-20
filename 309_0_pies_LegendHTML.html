@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TV - themes</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<link rel="stylesheet" href="static/bootstrap.css" >
+		<style>
+		body {text-align: center; margin: 2em;}
+		.legend {text-align: left; padding: 0em 2em; margin-bottom: 2em;}
+		.legend .legColor{display: inline-block; height: 20px; width: 20px; margin-right: 4px;}
+		.legend .legText{margin: 0px; padding: 0px;}
+		.legend .elementMasque {text-decoration-line: line-through}
+		.graphique {display: inline;}
+		.graphiqueParent {display: inline-block; position: relative;width: 300px;}
+		</style>
+    </head>
+    <body>
+		<!-- Zone ou seront créés les légendes -->
+		<div class="row legend" id="legend-container"></div>
+		
+		<!-- Zone ou seront créés les graphiques -->
+		<div id="graphiques"></div>
+		
+		
+		<div style="margin-top: 3em; font-size: 90%; color: grey">
+			<span>Source : </span><a href="https://data.smartidf.services" target="_blank">https://data.smartidf.services</a>
+		</div>
+
+        <script type="text/javascript">
+		var donnees = {
+			themes: ["Catastrophes", "Culture-loisirs", "Economie", "Education", "Environnement", "Faits divers", "Histoire-hommages", "International", "Justice", "Politique France", "Santé", "Sciences et techniques", "Société", "Sport"],
+			chaines: [{
+				nom: 'tf1',
+				moyennes: [43.67, 46.67, 62.96, 15.94, 33.22, 26.14, 13.34, 65.51, 27.6, 54.04, 35.83, 15.12, 113.24, 51.76]
+			}, {
+				nom: 'France 2',
+				moyennes: [43.26, 41.1, 65.43, 12.94, 29.56, 26.29, 14.13, 89.88, 29.48, 63.38, 32.22, 11.25, 111.03, 46.92]
+			}, {
+				nom: 'France 3',
+				moyennes: [31.83, 27.74, 40.74, 8.11, 18.99, 23.66, 10.46, 52.98, 25.97, 47.51, 23.11, 6.81, 75.66, 28.66]
+			}, {
+				nom: 'Canal+',
+				moyennes: [10.59, 10.72, 17.8, 3.19, 6.06, 10.63, 4.13, 43.5, 18.01, 17.98, 6.41, 3.64, 38.1, 16.53]
+			}, {
+				nom: 'Arte',
+				moyennes: [8.2, 24.68, 19.4, 1.91, 9.22, 3.43, 7.84, 133.08, 12.72, 11.96, 7.68, 4.99, 34.89, 2.34]
+			}, {
+				nom: 'M6',
+				moyennes: [29.34, 39.18, 29.77, 9.14, 14.08, 29.16, 8, 43.16, 25.37, 38.05, 24.43, 8.03, 76.83, 34.23]
+			}] 
+		}
+		
+		/// options communes
+		Chart.defaults.backgroundColor = ['#4E79A7', '#A0CBE8', '#F28E2B', '#FFBE7D', '#59A14F', '#8CD17D', '#B6992D', '#F1CE63', '#499894', '#86BCB6', '#E15759', '#FF9D9A', '#79706E', '#BAB0AC', '#D37295', '#FABFD2', '#B07AA1', '#D4A6C8', '#9D7660', '#D7B5A6'];;
+		Chart.defaults.plugins.title.display = true;
+
+		/// obtenir la zone des graphiques
+		//var zoneDesGraphiques = 
+		
+		/// pour chaque chaine
+		for (var i = 0; i < donnees.chaines.length ; i++) {
+			/// creer la zone pour un graphique
+
+			
+			/// creer le parent du graphe dans la zone du graphique 
+	
+			
+			/// creer le canvas pour le graphique
+
+			
+			/// obtenir le context de dessin
+			//var ctx = 
+			//var myChart = new Chart(ctx, {
+			//	type: 'doughnut',   //doughnut ou pie
+			//
+			//});	
+		}
+        </script>
+    </body>
+</html>

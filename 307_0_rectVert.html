@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>rectangle - horizontal</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+    </head>
+    <body>
+		<!-- 
+		la dimension d'un graphique est définie par son parent
+		si maintainAspectRation = true alors définir la largeur uniquement. La hauteur sera calculée
+		-->
+		<div style="width: 90%; max-width: 600px;">
+			<canvas id="myChart" ></canvas>
+		</div>
+		
+		<div style="margin-top: 2em; font-size: 90%; color: grey">
+			<span>Doc. : </span><a target="_blank" href="https://www.chartjs.org/docs/latest/configuration/responsive.html">responsive</a>
+		</div>		
+		
+		
+        <script type="text/javascript">
+		Chart.defaults.elements.bar.borderWidth = 1;
+		Chart.defaults.elements.bar.borderColor = 'rgba(75, 192, 192, 1)';
+		Chart.defaults.elements.bar.backgroundColor = 'rgba(75, 192, 192, 0.2)';
+		Chart.defaults.plugins.legend.display = false;
+		
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+				datasets: [{
+					data: [ 2245, 2486, 2402, 2435, 2042, 1361, 1251 ] ,   				
+				}]
+			},
+			options: {
+				// rapport largeur / hauteur
+			}
+		});
+        </script>
+    </body>
+</html>

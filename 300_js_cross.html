@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>cross script</title>
+		<link rel="stylesheet" href="static/bootstrap.css" >
+		
+		<style>
+		body {margin: 1em;}
+		#destination>div {display: inline-block; border: 2px dotted grey; padding: 0.5em; margin: 0.2em}</style>
+    </head>
+    <body>
+		<div>
+			<input id="input1" style="width: 90%"></input>
+			<div style="margin: 1em;">
+			<button id="boutonAjouterHTML" class="btn btn-secondary">Ajouter : innerHTML</button>
+			<button id="boutonAjouterText" class="btn btn-secondary">Ajouter : innerText</button>
+			</div>
+		</div>
+		<div id="destination">
+			
+		</div>		
+		<br/>
+		<div>
+			
+			<div>L'utilsation de innerHTML rend la page vulnérable à attaque par "cross site scripting (xss)"</div>
+			<div>innerHMTML doit être utilisé avec précaution et peut souvent être remplace par innerText</div>
+			<h2>Exemples</h2>
+			<div>saisir dans l'entrée :</div>
+			<div>&lt;img src="https://owasp.org/assets/images/logo.png" style="width:100px" onload="alert('Cross Site Scripting (XSS)')"/&gt;</div>
+			<div>ou :</div>
+			<div>&lt;img src="https://owasp.org/assets/images/logo.png" style="width:100px" onload="document.location = 'https://owasp.org/www-community/attacks/xss/'"/&gt;</div>
+		
+			<h2>information</h2>
+			<div>https://owasp.org/www-community/attacks/xss/</div>
+		</div>
+
+        <script type="text/javascript">
+			
+			document.getElementById('boutonAjouterHTML').addEventListener('click', function (e) {
+				var valeurEntree = document.getElementById('input1').value;
+				
+				/// creer un noeud
+				var element = document.createElement('div');
+				
+				/// ajouter la classe "mot" au noeud créé
+				element.classList.add('mot');
+				
+				/// indiquer la valeur entree comme id
+				element.setAttribute('id', valeurEntree)
+				
+				// contenu texte
+				element.innerHTML = valeurEntree;
+		
+				
+				// selectionner la destination
+				var destination = document.getElementById('destination');
+				
+				destination.appendChild(element);
+			}) ;
+
+			document.getElementById('boutonAjouterText').addEventListener('click', function (e) {
+				var valeurEntree = document.getElementById('input1').value;
+				
+				/// creer un noeud
+				var element = document.createElement('div');
+				
+				/// ajouter la classe "mot" au noeud créé
+				element.classList.add('mot');
+				
+				/// indiquer la valeur entree comme id
+				element.setAttribute('id', valeurEntree)
+				
+				// contenu texte
+				element.innerText = valeurEntree;
+		
+				
+				// selectionner la destination
+				var destination = document.getElementById('destination');
+				
+				destination.appendChild(element);
+			}) ;					
+        </script>
+    </body>
+</html>
