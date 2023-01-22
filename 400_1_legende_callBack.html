@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Météo</title>
+        <title>Légende generateLabels</title>
         <script type="text/javascript" src="./static/chart.js"></script>
 		<link rel="stylesheet" href="static/bootstrap.css" >
 		<style>svg {border: 4px solid black}</style>
@@ -73,9 +73,37 @@
 						text: 'Moyenne mensuelle'
 					},
 					legend: {
-						display: true,
 						position: 'bottom',
-						align: 'start'
+						align: 'end',
+						title: {
+							color: '#aaaaaa',
+							text: 'légende du graphique',
+							display: true,
+						},
+						labels: {
+							usePointStyle: true,
+							generateLabels: function (contexte) {
+								console.log(contexte);
+								var _labels = [];
+								for (var i =0; i < contexte.data.datasets.length ; i++) {
+									var _dataset = contexte.data.datasets[i];
+									// creer une etiquette
+									var _label = {
+										text: _dataset.label,
+										pointStyle: (_dataset.type === 'line')?'line':'rect',
+										fillStyle: _dataset.backgroundColor,
+										strokeStyle: _dataset.borderColor,
+										lineWidth: Chart.defaults.datasets[_dataset.type].borderWidth,
+										hidden: false
+									}
+									
+									// ajouter l'etiquette àu tableau des etiquettes
+									_labels.push(_label)
+								}
+								
+								return _labels;
+							}
+						}
 					}	
 				},
 				scales: {

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TV - totaux</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<script type="text/javascript" src="./static/colorschemes.js"></script>
+		<script type="text/javascript" src="./donnees/tv_raw.js"></script>
+	
+    </head>
+    <body>
+		<div style="position: relative; width: 95%; min-width: 400px; display: inline-block">
+			<canvas id="precip"></canvas>
+		</div>
+
+		
+        <script type="text/javascript">
+	
+		function calcColor (i) {
+			return 'hsl('+i * (360/14)+' 100% 40%)';
+		}	;
+		
+		var _datasets = [];
+		let i = 0;
+		for (theme in donnees.themes) {
+			_datasets.push({
+				label: theme,
+				data: donnees.themes[theme].total,
+				borderColor: Tableau20[i],
+				backgroundColor: Tableau20[i],
+				tension: 0.4,
+				borderWidth: 1,
+				pointRadius: 1,
+				yAxisID: 'yNum' + i, 
+			})
+			i++;
+		}
+		
+		var ctx = document.getElementById('precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: donnees.periodes,
+				datasets: _datasets,
+			}, options: {
+				pointRadius: 1,
+				borderWidth: 1,
+				
+				scales: {
+					yNum0: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 1,
+					},
+					yNum1: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 2,
+					},
+					yNum2: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 3,
+					},
+					yNum3: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 4,
+					}, 
+					yNum4: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 5,
+					},
+					yNum5: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 6,
+					},
+					yNum6: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 7,
+					},
+					yNum7: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 4,
+					}, 
+					yNum8: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 9,
+					},
+					yNum9: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 10,
+					},
+					yNum10: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 11,
+					},
+					yNum11: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 12,
+					},
+					yNum12: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 13,
+					},
+					yNum13: {
+						stacked: true,
+						stack: 'demo',
+						offset: false,
+						min: 0,
+						max: 2200,
+						//stackWeight: 14,
+					}
+				}
+			}
+		});		
+        </script>
+    </body>
+</html>

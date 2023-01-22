@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>chart.js - compteurs</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+    </head>
+    <body>
+		<div style="width: 500px;">
+			<canvas id="myChart" ></canvas>
+		</div>
+        <script type="text/javascript">
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: [],
+				datasets: [{
+					data: [  ] ,   
+					label: 'Moyenne journalière',					
+					borderWidth: 1,
+					borderColor: ['rgba(75, 192, 192, 1)'],
+					backgroundColor: ['rgba(75, 192, 192, 0.2)']
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+		//alert('ooo')
+		
+		var i = 0;
+		setInterval(function() {
+			if (myChart.data.labels.length > 10) {
+				myChart.data.labels.shift();
+				myChart.data.datasets[0].data.shift();
+			}
+			myChart.data.labels.push(i++);
+			myChart.data.datasets[0].data.push(Math.random()*1000)
+			myChart.update()
+		 }, 500);
+        </script>
+    </body>
+</html>

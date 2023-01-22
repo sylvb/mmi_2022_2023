@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TV - totaux</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<script type="text/javascript" src="./static/colorschemes.js"></script>
+		<script type="text/javascript" src="./donnees/tv_raw.js"></script>
+	
+    </head>
+    <body>
+		<div style="position: relative;width: 100%; height:700px; min-width: 400px; display: inline-block">
+			<canvas id="precip"></canvas>
+		</div>
+
+        <script type="text/javascript">
+	
+		
+		var _datasets = [];
+		let i = 0;
+		for (theme in donnees.themes) {
+			_datasets.push({
+				label: theme,
+				data: donnees.themes[theme].total,
+				borderColor: Tableau20[i],
+				backgroundColor: Tableau20[i],
+				tension: 0.1,
+				borderWidth: 1,
+				pointRadius: 0,
+				yAxisID: i>7?'yRev':'y',
+				fill: (i==0)?true:'-1',
+			})
+			i++;
+		}
+		
+		var ctx = document.getElementById('precip').getContext('2d');
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: donnees.periodes,
+				datasets: _datasets,
+			}, options: {	
+				maintainAspectRatio: false,
+				interaction: {
+				  mode: 'index',
+				  intersect: false,
+				},	
+				pointRadius: 1,
+				borderWidth: 1,
+				
+				scales: {
+					//x: {position: 'center'},
+				  yRev: {
+					stacked: true,
+					reverse: true,
+					stack:'eee',
+					max: 2500,
+				  },
+				  y: {
+					stacked: true,
+					stack:'eee',
+					max: 2500,
+				  }
+				}
+			}
+		});		
+        </script>
+    </body>
+</html>

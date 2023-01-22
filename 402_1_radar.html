@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>TV - themes</title>
+        <script type="text/javascript" src="./static/chart.js"></script>
+		<script type="text/javascript" src="./static/colorschemes.js"></script>
+		<script type="text/javascript" src="./donnees/tv_moyenne_themesParChainesPercent.js"></script>
+		<style>body {text-align: center; margin: 2em;}</style>
+    </head>
+    <body>
+		<div style="position: relative;width: 600px;  min-width: 200px; display: inline-block">
+			<canvas id="myChart"></canvas>
+		</div>
+		<div style="margin-top: 2em; font-size: 90%; color: grey">
+			<span>Source : </span><a href="https://data.smartidf.services" target="_blank">https://data.smartidf.services</a>
+		</div>
+        <script type="text/javascript">
+		
+		/// moyennes : objet declaré dans le fichier ./donnees/tv_moyenne_themesParChainesPercent.js.js
+		console.log(moyennes)
+		
+		Chart.defaults.backgroundColor = Tableau20;
+				
+		const ctx = document.getElementById('myChart').getContext('2d');
+		const myChart = new Chart(ctx, {
+			type: 'radar',
+			data: {
+				labels: moyennes.themes,
+				datasets: [{
+					label: 'TF1',
+					data: moyennes.tf1,
+					borderColor: Tableau20[0],
+				}, {
+					label: 'France 2',
+					data: moyennes.f2,
+					borderColor: Tableau20[1],
+				},{
+					label: 'France 3',
+					data: moyennes.f3,
+					borderColor: Tableau20[2],
+				}, {
+					label: 'Canal+',
+					data: moyennes.canalPlus,
+					borderColor: Tableau20[3],
+				},{
+					label: 'Arte',
+					data: moyennes.arte,
+					borderColor: Tableau20[4],
+				}, {
+					label: 'M6',
+					data: moyennes.m6,
+					borderColor: Tableau20[5],
+				}],
+			},
+			options: {
+				fill: false,
+				interaction: {
+				  mode: 'index',
+				  intersect: true,
+				},			
+				
+				pointRadius: 2,
+				tension: 0.05,
+				backgroundColor: '#ffffff99',
+				plugins: {
+					title: {
+						text: 'Thématique des journaux du soir',
+						display: true,
+						fullSize: false,
+					},
+					legend: {
+						position: 'bottom',
+						//align: 'start',
+						labels: {
+							usePointStyle: true,
+							pointStyle: 'line',
+						}
+					}
+			
+				}
+			}
+		});
+        </script>
+    </body>
+</html>
